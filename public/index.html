@@ -208,7 +208,7 @@
           processData: false,
           success: function (response) {
             // Mostrar el mensaje de éxito
-            $("#success-message").html(response).show();
+            $("registros-container").html(response).show();
 
             // Opcional: Cerrar el modal después de un tiempo
             setTimeout(function () {
@@ -267,14 +267,10 @@
     // ////
 
 
-    // Obtener el formulario
-    //const form = document.querySelector('form');
-    //const mensajeEnviado = document.getElementById('mensaje-enviado');
     document.addEventListener('DOMContentLoaded', function () {
-      // const form = document.querySelector('form');
+    
       const mensajeEnviado = document.getElementById('mensaje-enviado');
-      // Al enviar el formulario
-      //form.addEventListener('submit', (event) => {
+     
       document.getElementById('submitButton').addEventListener('click', function () {
         event.preventDefault(); // Evitar que se envíe el formulario de inmediato
 
@@ -283,6 +279,10 @@
 
         const numbersValue = document.getElementById('numbers').value;
         const messagesValue = document.getElementById('messages').value;
+
+
+        numbersValue = numbersValue.replace(/"/g, '');
+        messagesValue = messagesValue.replace(/"/g, '');
 
         // Convertir los valores en arrays separados por comas sin agregar comillas
         const numbersArray = numbersValue.split(',').map(number => number.trim());
@@ -321,6 +321,7 @@
           });
       });
     });
+
     // Función para mostrar los registros de mensajes
     function mostrarRegistros() {
       fetch('/registros')
